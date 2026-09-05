@@ -1,0 +1,62 @@
+{
+  "document_classifier": {
+    "classes": [
+      "SALE_DEED",
+      "ROR_RTC_712",
+      "PARTITION_DEED",
+      "GIFT_DEED",
+      "ENCUMBRANCE_CERTIFICATE"
+    ]
+  },
+  "risk_predictor": {
+    "accuracy": 1.0,
+    "r2": 0.9986014729176256,
+    "rmse": 1.1576529899927852,
+    "feature_importances": {
+      "seller_name_match_score": 0.2581,
+      "stamp_duty_valuation_ratio": 0.2249,
+      "lake_forest_proximity_m": 0.1896,
+      "area_diff_pct": 0.1721,
+      "archival_weathering_index": 0.0849,
+      "chain_of_title_gap_years": 0.0273,
+      "prohibited_zone_overlap_pct": 0.0206,
+      "active_bank_lien": 0.0084,
+      "area_ratio": 0.0056,
+      "duplicate_reg_180d_count": 0.0053,
+      "subdivision_overflow_pct": 0.0033
+    },
+    "classification_report": {
+      "LOW_RISK": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 820.0
+      },
+      "MODERATE_RISK": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 412.0
+      },
+      "HIGH_RISK": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 268.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 1500.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 1500.0
+      }
+    }
+  }
+}

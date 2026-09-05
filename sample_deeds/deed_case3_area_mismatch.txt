@@ -1,0 +1,32 @@
+GOVERNMENT OF KARNATAKA - DEPARTMENT OF STAMPS AND REGISTRATION
+OFFICE OF THE SUB-REGISTRAR, RAMANAGARA TALUK
+REGISTERED DOCUMENT: RMN-1-03201-2023
+
+================================================================================
+       REGISTERED DEED OF CONVEYANCE - SURVEY NO. 104 (AREA INFLATION)
+================================================================================
+
+VENDOR:
+Sri. PRATAP SINGH RATHORE, S/o Bhairav Singh,
+residing at Mayaganahalli Village, Ramanagara.
+
+PURCHASER:
+Sri. SUNIL DESHMUKH, S/o Madhav Deshmukh.
+
+SCHEDULE PROPERTY:
+  * Survey Number: 104
+  * Village: Mayaganahalli, Taluk: Ramanagara
+  * Claimed Extent in Deed: 3 Acres 20 Guntas (14,164 Sq. Meters)
+  * Consideration Amount: Rs. 58,00,000/-
+
+SCHEDULE OF BOUNDARIES:
+  - NORTH BY : Survey No. 103 Land
+  - SOUTH BY : Forest Department Boundary Stone (ಅರಣ್ಯ ಇಲಾಖೆ ಸರ್ವೆ ಕಲ್ಲು)
+  - EAST BY  : Village Cart Road
+  - WEST BY  : Survey No. 105 Agriculture
+
+[AUDIT DISCREPANCY NOTE]:
+Physical cadastral boundary polygon mapped via Electronic Total Station (ETS)
+and DILRMP GIS records only 2 Acres 35 Guntas (11,635 Sq. Meters).
+Deed claims an inflated extent of +21.7% (25 Guntas excess).
+Possible paper overlap with neighboring Reserve Forest Buffer!

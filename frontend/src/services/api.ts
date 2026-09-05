@@ -1,7 +1,7 @@
 import { ValidationResponse, DemoScenario, LedgerBlock } from '../types/landRecord';
 import { INITIAL_VALIDATION_RESULT, DEMO_SCENARIOS } from '../data/mockData';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://land-record-ai-w4sc.onrender.com';
 
 export async function checkBackendHealth(): Promise<boolean> {
   try {

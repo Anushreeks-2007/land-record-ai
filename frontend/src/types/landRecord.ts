@@ -1,6 +1,7 @@
 export type RiskLevel = 'LOW_RISK' | 'MODERATE_RISK' | 'HIGH_RISK';
 export type UserRole = 'CITIZEN' | 'OFFICER';
 export type Language = 'en' | 'hi' | 'kn';
+export type AppView = 'landing' | 'citizen' | 'officer-login' | 'officer-dashboard' | 'gis' | 'ml' | 'ledger';
 
 export interface BoundingBox {
   field: string;

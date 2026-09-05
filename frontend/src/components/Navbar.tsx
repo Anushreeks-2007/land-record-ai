@@ -1,40 +1,73 @@
 import React from 'react';
-import { UserRole, Language } from '../types/landRecord';
+import { AppView, UserRole, Language } from '../types/landRecord';
 import { UI_STRINGS } from '../data/mockData';
-import { ShieldCheck, MapPin, Database, Award, Activity, FileCheck, Layers } from 'lucide-react';
+import {
+  ShieldCheck,
+  MapPin,
+  Database,
+  Award,
+  Activity,
+  Home,
+  FileCheck2,
+  Building2,
+  User,
+  ExternalLink,
+} from 'lucide-react';
 
 interface NavbarProps {
-  currentTab: 'portal' | 'gis' | 'ml' | 'ledger';
-  setCurrentTab: (tab: 'portal' | 'gis' | 'ml' | 'ledger') => void;
+  currentView: AppView;
+  setCurrentView: (view: AppView) => void;
   role: UserRole;
   setRole: (role: UserRole) => void;
   lang: Language;
   setLang: (lang: Language) => void;
   backendOnline: boolean;
+  isOfficerAuthenticated: boolean;
+  onOpenCertificate?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  currentTab,
-  setCurrentTab,
+  currentView,
+  setCurrentView,
   role,
   setRole,
   lang,
   setLang,
   backendOnline,
+  isOfficerAuthenticated,
+  onOpenCertificate,
 }) => {
   const t = UI_STRINGS[lang];
 
+  const handleSelectHome = () => {
+    setCurrentView('landing');
+  };
+
+  const handleSelectCitizen = () => {
+    setRole('CITIZEN');
+    setCurrentView('citizen');
+  };
+
+  const handleSelectOfficer = () => {
+    setRole('OFFICER');
+    if (isOfficerAuthenticated) {
+      setCurrentView('officer-dashboard');
+    } else {
+      setCurrentView('officer-login');
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-xl">
+    <header className="sticky top-0 z-50 bg-forest-deep/96 backdrop-blur-md border-b border-forest-mid shadow-[0_8px_24px_rgba(18,53,44,0.28)]">
       {/* Top Gov-Tech Ribbon */}
-      <div className="bg-gradient-to-r from-emerald-900/70 via-indigo-950/80 to-amber-950/70 text-xs px-4 py-1.5 flex flex-wrap items-center justify-between border-b border-slate-800/80">
-        <div className="flex items-center space-x-3 text-slate-300">
-          <span className="flex items-center space-x-1.5 font-semibold text-amber-400">
+      <div className="bg-forest/80 text-xs px-4 py-1.5 flex flex-wrap items-center justify-between border-b border-white/10">
+        <div className="flex items-center space-x-3 text-sand">
+          <span className="flex items-center space-x-1.5 font-semibold text-sand">
             <Award className="w-3.5 h-3.5" />
-            <span>Smart India Hackathon (SIH)</span>
+            <span>Smart India Hackathon (SIH 2026)</span>
           </span>
-          <span className="text-slate-600">|</span>
-          <span className="text-slate-400 hidden sm:inline">
+          <span className="text-white/25">|</span>
+          <span className="text-sand-warm hidden sm:inline">
             Ministry of Rural Development &bull; Department of Land Resources (DILRMP)
           </span>
         </div>
@@ -47,41 +80,41 @@ export const Navbar: React.FC<NavbarProps> = ({
                 backendOnline ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'
               }`}
             />
-            <span className="text-[11px] text-slate-400">
-              {backendOnline ? 'ML & GIS Core Live (Port 8000)' : 'Client Engine Active'}
+            <span className="text-[11px] text-sand">
+              {backendOnline ? 'ML & GIS Engine Online' : 'Client Fallback Engine Active'}
             </span>
           </div>
 
-          <span className="text-slate-700">|</span>
+          <span className="text-white/20">|</span>
 
-          {/* Language Selector */}
+          {/* Multilingual Selector (EN / हिन्दी / ಕನ್ನಡ) */}
           <div className="flex items-center space-x-1 text-[11px]">
             <button
               onClick={() => setLang('en')}
-              className={`px-1.5 py-0.5 rounded transition ${
+              className={`px-2 py-0.5 rounded transition cursor-pointer ${
                 lang === 'en'
-                  ? 'bg-emerald-600 text-white font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-forest-bright text-white font-bold shadow-sm'
+                  : 'text-sand hover:text-white'
               }`}
             >
               EN
             </button>
             <button
               onClick={() => setLang('hi')}
-              className={`px-1.5 py-0.5 rounded transition ${
+              className={`px-2 py-0.5 rounded transition cursor-pointer ${
                 lang === 'hi'
-                  ? 'bg-emerald-600 text-white font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-forest-bright text-white font-bold shadow-sm'
+                  : 'text-sand hover:text-white'
               }`}
             >
               हिन्दी
             </button>
             <button
               onClick={() => setLang('kn')}
-              className={`px-1.5 py-0.5 rounded transition ${
+              className={`px-2 py-0.5 rounded transition cursor-pointer ${
                 lang === 'kn'
-                  ? 'bg-emerald-600 text-white font-bold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-forest-bright text-white font-bold shadow-sm'
+                  : 'text-sand hover:text-white'
               }`}
             >
               ಕನ್ನಡ
@@ -93,100 +126,173 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Main Navigation Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          {/* Logo & Branding */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setCurrentTab('portal')}>
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-600 to-indigo-700 p-0.5 shadow-lg shadow-emerald-950/40">
-              <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6 text-emerald-400" />
+          {/* Logo & Government Branding */}
+          <div
+            className="flex items-center space-x-3 cursor-pointer group"
+            onClick={handleSelectHome}
+          >
+            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-sand/20 p-0.5 shadow-lg border border-sand/30 group-hover:scale-105 transition-transform">
+              <div className="w-full h-full bg-forest rounded-[10px] flex items-center justify-center">
+                <ShieldCheck className="w-6 h-6 text-sand" />
               </div>
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-xl font-black tracking-tight text-white flex items-center gap-1.5">
+                <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-1.5 leading-none">
                   <span>{t.title}</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
-                    v2.0
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-sand border border-white/15 font-medium">
+                    SIH 2026
                   </span>
                 </h1>
               </div>
-              <p className="text-xs text-slate-400 font-medium">{t.subtitle}</p>
+              <p className="text-[11px] text-sand font-medium tracking-wide mt-1 uppercase">
+                {t.subtitle}
+              </p>
             </div>
           </div>
 
-          {/* Center Navigation Tabs */}
-          <nav className="flex items-center space-x-1 sm:space-x-2 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
-            <button
-              onClick={() => setCurrentTab('portal')}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                currentTab === 'portal'
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-              }`}
-            >
-              <FileCheck className="w-4 h-4" />
-              <span>{role === 'CITIZEN' ? 'Validation Studio' : 'Officer Console'}</span>
-            </button>
+          {/* CITIZEN MODE NAVIGATION */}
+          {role === 'CITIZEN' && currentView !== 'landing' && (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <nav className="flex items-center space-x-1 sm:space-x-1.5 bg-black/20 p-1 rounded-xl border border-white/10">
+                <button
+                  onClick={handleSelectHome}
+                  className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-sand hover:text-white hover:bg-white/10 transition cursor-pointer"
+                >
+                  <Home className="w-3.5 h-3.5" />
+                  <span>{t.home}</span>
+                </button>
 
-            <button
-              onClick={() => setCurrentTab('gis')}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                currentTab === 'gis'
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-              }`}
-            >
-              <MapPin className="w-4 h-4" />
-              <span>{t.gisTab}</span>
-            </button>
+                <button
+                  onClick={handleSelectCitizen}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'citizen'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <FileCheck2 className="w-3.5 h-3.5" />
+                  <span>Validate Land</span>
+                </button>
 
-            <button
-              onClick={() => setCurrentTab('ml')}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                currentTab === 'ml'
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-              }`}
-            >
-              <Activity className="w-4 h-4" />
-              <span>{t.mlTab}</span>
-            </button>
+                <button
+                  onClick={() => setCurrentView('gis')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'gis'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>{t.gisTab}</span>
+                </button>
 
-            <button
-              onClick={() => setCurrentTab('ledger')}
-              className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                currentTab === 'ledger'
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
-              }`}
-            >
-              <Database className="w-4 h-4" />
-              <span>{t.ledgerTab}</span>
-            </button>
-          </nav>
+                {onOpenCertificate && (
+                  <button
+                    onClick={onOpenCertificate}
+                    className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-sand hover:text-white hover:bg-white/10 transition cursor-pointer"
+                  >
+                    <span>📄</span>
+                    <span>Certificate</span>
+                  </button>
+                )}
+              </nav>
 
-          {/* Role Switcher Pill */}
-          <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
-            <button
-              onClick={() => setRole('CITIZEN')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                role === 'CITIZEN'
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-950'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Citizen View
-            </button>
-            <button
-              onClick={() => setRole('OFFICER')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
-                role === 'OFFICER'
-                  ? 'bg-amber-600 text-white shadow-md shadow-amber-950'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              Tahsildar Mode
-            </button>
-          </div>
+              {/* Discreet Officer Portal switch link */}
+              <button
+                onClick={handleSelectOfficer}
+                className="inline-flex items-center space-x-1 text-xs text-sand/80 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition cursor-pointer"
+                title="Switch to Revenue Officer Portal"
+              >
+                <Building2 className="w-3.5 h-3.5 text-sand/70" />
+                <span>Officer Portal →</span>
+              </button>
+            </div>
+          )}
+
+          {/* OFFICER MODE NAVIGATION (PRESERVED FULL OFFICER TOOLS) */}
+          {role === 'OFFICER' && currentView !== 'landing' && (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <nav className="flex items-center space-x-1 sm:space-x-1.5 bg-black/20 p-1 rounded-xl border border-white/10">
+                <button
+                  onClick={handleSelectOfficer}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'officer-dashboard' || currentView === 'officer-login'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>Officer Console</span>
+                </button>
+
+                <button
+                  onClick={() => setCurrentView('gis')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'gis'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>{t.gisTab}</span>
+                </button>
+
+                <button
+                  onClick={() => setCurrentView('ml')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'ml'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Activity className="w-3.5 h-3.5" />
+                  <span>{t.mlTab}</span>
+                </button>
+
+                <button
+                  onClick={() => setCurrentView('ledger')}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    currentView === 'ledger'
+                      ? 'bg-forest-mid text-white shadow-md'
+                      : 'text-sand hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Database className="w-3.5 h-3.5" />
+                  <span>{t.ledgerTab}</span>
+                </button>
+              </nav>
+
+              {/* Discreet Citizen Portal switch */}
+              <button
+                onClick={handleSelectCitizen}
+                className="inline-flex items-center space-x-1 text-xs text-sand/80 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition cursor-pointer"
+                title="Switch to Citizen Portal"
+              >
+                <User className="w-3.5 h-3.5 text-sand/70" />
+                <span>Citizen View →</span>
+              </button>
+            </div>
+          )}
+
+          {/* LANDING VIEW NAVIGATION */}
+          {currentView === 'landing' && (
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={handleSelectCitizen}
+                className="px-3.5 py-1.5 rounded-xl bg-forest hover:bg-forest-mid text-white text-xs font-bold shadow-md transition cursor-pointer"
+              >
+                {t.citizenRoleTitle} Portal
+              </button>
+              <button
+                onClick={handleSelectOfficer}
+                className="px-3.5 py-1.5 rounded-xl bg-paper-raised/15 hover:bg-white/20 text-sand hover:text-white text-xs font-semibold border border-white/20 transition cursor-pointer flex items-center space-x-1"
+              >
+                <Building2 className="w-3.5 h-3.5" />
+                <span>{t.officerRoleTitle} Login</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

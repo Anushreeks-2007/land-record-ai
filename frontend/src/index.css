@@ -1,31 +1,167 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Noto Sans Devanagari", "Noto Sans Kannada", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #1a241c;
+  --color-ink-muted: #4a5750;
+  --color-ink-faint: #66756c;
+  --color-paper: #f3efe6;
+  --color-paper-raised: #fbf8f1;
+  --color-paper-sunken: #ebe6db;
+  --color-line: #d4cec0;
+  --color-line-strong: #c3bbab;
+
+  --color-forest: #1b4d3e;
+  --color-forest-deep: #12352c;
+  --color-forest-mid: #246b54;
+  --color-forest-bright: #2d7a5f;
+  --color-sage: #7a9184;
+  --color-sage-mist: #e4ece6;
+  --color-sand: #e6dccb;
+  --color-sand-warm: #d9ccb4;
+}
+
 @layer base {
   body {
-    @apply bg-slate-950 text-slate-100 antialiased font-sans;
+    @apply bg-paper text-ink antialiased font-sans;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+}
+
+@layer components {
+  .bp-card {
+    @apply bg-paper-raised/95 backdrop-blur-sm rounded-2xl border border-line shadow-[0_8px_24px_rgba(18,53,44,0.06)];
+  }
+
+  .bp-inset {
+    @apply bg-paper-sunken/80 border border-line rounded-xl;
+  }
+
+  .bp-btn-primary {
+    @apply bg-forest hover:bg-forest-mid text-white font-semibold shadow-[0_8px_18px_rgba(27,77,62,0.22)] transition cursor-pointer;
+  }
+
+  .bp-btn-secondary {
+    @apply bg-paper-raised hover:bg-sage-mist text-forest-deep border border-line font-semibold transition cursor-pointer;
+  }
+
+  .bp-nav-active {
+    @apply bg-forest text-white shadow-sm;
+  }
+
+  /* Step indicator classes */
+  .step-node {
+    @apply w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-300;
+  }
+  .step-node-active {
+    @apply bg-forest text-white shadow-[0_0_0_4px_rgba(36,107,84,0.2)] scale-105;
+  }
+  .step-node-completed {
+    @apply bg-forest-mid text-white;
+  }
+  .step-node-pending {
+    @apply bg-paper-sunken border-2 border-line text-ink-muted;
+  }
+}
+
+/* Cadastral survey-map paper background */
+.cadastral-page {
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(rgba(27, 77, 62, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 77, 62, 0.045) 1px, transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='720' viewBox='0 0 720 720'%3E%3Cg fill='none' stroke='%231b4d3e' stroke-width='1.1' opacity='0.07'%3E%3Cpath d='M48 72 L176 44 L228 168 L86 198 Z'/%3E%3Cpath d='M176 44 L318 78 L292 206 L228 168 Z'/%3E%3Cpath d='M86 198 L228 168 L246 318 L70 292 Z'/%3E%3Cpath d='M318 78 L470 56 L492 210 L292 206 Z'/%3E%3Cpath d='M246 318 L292 206 L492 210 L470 370 L260 392 Z'/%3E%3Cpath d='M470 56 L620 96 L598 240 L492 210 Z'/%3E%3Cpath d='M70 292 L246 318 L260 392 L94 448 Z'/%3E%3Cpath d='M260 392 L470 370 L454 520 L248 534 Z'/%3E%3Cpath d='M492 210 L598 240 L640 390 L470 370 Z'/%3E%3Cpath d='M94 448 L248 534 L210 640 L52 590 Z'/%3E%3Cpath d='M248 534 L454 520 L430 650 L210 640 Z'/%3E%3Cpath d='M470 370 L640 390 L668 560 L454 520 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 40px 40px, 40px 40px, 720px 720px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+.cadastral-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(135deg, rgba(251, 248, 241, 0.96) 0%, rgba(228, 236, 230, 0.9) 48%, rgba(230, 220, 203, 0.94) 100%);
+}
+
+.cadastral-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='280' viewBox='0 0 560 280'%3E%3Cg fill='none' stroke='%2312352c' stroke-width='1.2'%3E%3Cpath d='M20 40 L120 18 L168 110 L48 132 Z'/%3E%3Cpath d='M120 18 L250 36 L232 128 L168 110 Z'/%3E%3Cpath d='M48 132 L168 110 L190 210 L36 228 Z'/%3E%3Cpath d='M250 36 L390 22 L410 130 L232 128 Z'/%3E%3Cpath d='M390 22 L540 48 L520 150 L410 130 Z'/%3E%3Cpath d='M190 210 L232 128 L410 130 L398 240 L210 252 Z'/%3E%3C/g%3E%3Ccircle cx='168' cy='110' r='2.2' fill='%2312352c'/%3E%3Ccircle cx='232' cy='128' r='2.2' fill='%2312352c'/%3E%3Ccircle cx='410' cy='130' r='2.2' fill='%2312352c'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right -20px center;
+  background-size: min(560px, 70%) auto;
+}
+
+.cadastral-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Subtle survey corner boundary tick */
+.corner-ticks {
+  position: relative;
+}
+.corner-ticks::before,
+.corner-ticks::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+.corner-ticks::before {
+  top: 8px;
+  left: 8px;
+  border-top: 2px solid rgba(27, 77, 62, 0.3);
+  border-left: 2px solid rgba(27, 77, 62, 0.3);
+}
+.corner-ticks::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid rgba(27, 77, 62, 0.3);
+  border-right: 2px solid rgba(27, 77, 62, 0.3);
 }
 
 /* Leaflet Map Custom Styling */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  background: #0f172a !important;
+  background: #e6dccb !important;
   font-family: inherit;
   border-radius: 0.75rem;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #1e293b !important;
-  color: #f8fafc !important;
+  background: #fbf8f1 !important;
+  color: #1a241c !important;
   border-radius: 0.75rem !important;
-  border: 1px solid #334155 !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid #d4cec0 !important;
+  box-shadow: 0 16px 32px -8px rgba(18, 53, 44, 0.18) !important;
 }
 
 .leaflet-popup-tip {
-  background: #1e293b !important;
+  background: #fbf8f1 !important;
+}
+
+.leaflet-tooltip {
+  background: #fbf8f1 !important;
+  color: #1a241c !important;
+  border: 1px solid #d4cec0 !important;
+  box-shadow: 0 8px 18px rgba(18, 53, 44, 0.12) !important;
+}
+
+.leaflet-bar a {
+  background: #fbf8f1 !important;
+  color: #1b4d3e !important;
+  border-bottom-color: #d4cec0 !important;
+}
+
+.leaflet-bar a:hover {
+  background: #e4ece6 !important;
 }
 
 /* Custom Scrollbars */
@@ -34,12 +170,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #ebe6db;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #7a9184;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #246b54;
 }

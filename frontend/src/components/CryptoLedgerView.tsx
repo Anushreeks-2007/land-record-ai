@@ -79,18 +79,18 @@ export const CryptoLedgerView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 py-2">
       {/* Header */}
-      <div className="bg-slate-900/80 backdrop-blur-md rounded-2xl border border-slate-800 p-6 shadow-xl">
+      <div className="bp-card p-6 border-2 border-line">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div className="flex items-center space-x-2">
-              <Database className="w-5 h-5 text-teal-400" />
-              <h2 className="text-xl font-bold text-white">
+              <Database className="w-5 h-5 text-forest-mid" />
+              <h2 className="text-xl font-bold text-forest-deep">
                 Bhu-Ledger: Cryptographic Land Title Provenance
               </h2>
             </div>
-            <p className="text-xs text-slate-400 mt-1 max-w-3xl">
+            <p className="text-xs text-ink-muted mt-1 max-w-3xl leading-relaxed">
               Prevents silent revenue database alterations by intermediaries. Every validated
               deed, survey split, and Tahsildar approval is cryptographically anchored in a SHA-256
               Merkle audit chain.
@@ -101,7 +101,7 @@ export const CryptoLedgerView: React.FC = () => {
             {!tampered ? (
               <button
                 onClick={simulateTampering}
-                className="px-4 py-2 rounded-xl bg-rose-600/90 hover:bg-rose-500 text-white text-xs font-bold shadow-lg shadow-rose-950/40 flex items-center space-x-1.5 transition"
+                className="px-4 py-2 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold shadow-md flex items-center space-x-1.5 transition cursor-pointer"
               >
                 <AlertTriangle className="w-4 h-4" />
                 <span>Simulate DB Tampering (Judge Demo)</span>
@@ -109,7 +109,7 @@ export const CryptoLedgerView: React.FC = () => {
             ) : (
               <button
                 onClick={restoreLedger}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-950/40 flex items-center space-x-1.5 transition"
+                className="px-4 py-2 rounded-xl bg-forest hover:bg-forest-mid text-white text-xs font-bold shadow-md flex items-center space-x-1.5 transition cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Restore Legitimate Ledger</span>
@@ -121,16 +121,16 @@ export const CryptoLedgerView: React.FC = () => {
 
       {/* Tamper Alert Banner if triggered */}
       {tampered && (
-        <div className="p-4 bg-rose-950/80 border-2 border-rose-500 rounded-2xl text-xs text-rose-200 flex items-start space-x-3 shadow-2xl animate-in shake">
-          <ShieldAlert className="w-6 h-6 text-rose-400 shrink-0 mt-0.5" />
+        <div className="p-4 bg-rose-50 border-2 border-rose-500 rounded-2xl text-xs text-rose-900 flex items-start space-x-3 shadow-lg">
+          <ShieldAlert className="w-6 h-6 text-rose-700 shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-extrabold text-sm text-white">
+            <h4 className="font-extrabold text-sm text-rose-900">
               CRITICAL AUDIT ALARM: UNAUTHORIZED LEDGER MODIFICATION DETECTED!
             </h4>
-            <p className="mt-1 text-rose-200 leading-relaxed">
+            <p className="mt-1 text-rose-800 leading-relaxed">
               Block #1 payload was altered outside the consensus protocol. The calculated SHA-256
-              Merkle digest no longer matches Block #2's <code>previous_hash</code> pointer.
-              The system has quarantined the altered record and notified the State Vigilance Commission.
+              Merkle digest no longer matches Block #2&apos;s <code>previous_hash</code> pointer.
+              The system has quarantined the altered record and notified the State Land Governance Authority.
             </p>
           </div>
         </div>
@@ -138,33 +138,33 @@ export const CryptoLedgerView: React.FC = () => {
 
       {/* Blockchain Blocks List */}
       <div className="space-y-4">
-        {blocks.map((block, idx) => (
+        {blocks.map((block) => (
           <div
             key={block.id}
             className={`p-5 rounded-2xl border transition-all ${
               block.status === 'VERIFIED'
-                ? 'bg-slate-900/80 border-slate-800 shadow-xl'
-                : 'bg-rose-950/40 border-rose-600 shadow-2xl'
+                ? 'bp-card'
+                : 'bg-rose-50/90 border-rose-400 shadow-xl'
             }`}
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-line">
               <div className="flex items-center space-x-2.5">
-                <span className="w-7 h-7 rounded-lg bg-slate-950 flex items-center justify-center font-mono font-bold text-xs text-teal-400 border border-slate-800">
+                <span className="w-7 h-7 rounded-lg bg-sage-mist flex items-center justify-center font-mono font-bold text-xs text-forest-deep border border-forest/20">
                   #{block.index}
                 </span>
-                <span className="font-mono text-xs font-bold text-white">{block.id}</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">
+                <span className="font-mono text-xs font-bold text-forest-deep">{block.id}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-paper-sunken text-ink-muted border border-line font-mono">
                   ULPIN: {block.ulpin}
                 </span>
               </div>
 
               <div className="flex items-center space-x-2 text-xs">
-                <span className="text-slate-500">{block.timestamp}</span>
+                <span className="text-ink-faint font-mono">{block.timestamp}</span>
                 <span
                   className={`font-bold px-2 py-0.5 rounded-full text-[10px] ${
                     block.status === 'VERIFIED'
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                      : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                      ? 'bg-green-100 text-green-900 border border-green-300'
+                      : 'bg-rose-100 text-rose-900 border border-rose-300'
                   }`}
                 >
                   {block.status}
@@ -174,29 +174,29 @@ export const CryptoLedgerView: React.FC = () => {
 
             {/* Block Content Grid */}
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                <span className="text-slate-500 text-[10px] block">Survey & Extent:</span>
-                <span className="font-semibold text-white">
+              <div className="bg-paper-sunken p-2.5 rounded-xl border border-line">
+                <span className="text-ink-faint text-[10px] block">Survey & Extent:</span>
+                <span className="font-semibold text-forest-deep">
                   Survey No. {block.survey_no} ({block.extent})
                 </span>
               </div>
 
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                <span className="text-slate-500 text-[10px] block">Khatedar Titleholder:</span>
+              <div className="bg-paper-sunken p-2.5 rounded-xl border border-line">
+                <span className="text-ink-faint text-[10px] block">Khatedar Titleholder:</span>
                 <span
                   className={`font-semibold ${
-                    block.status === 'TAMPERED' ? 'text-rose-400 font-bold' : 'text-slate-200'
+                    block.status === 'TAMPERED' ? 'text-rose-700 font-bold' : 'text-ink'
                   }`}
                 >
                   {block.owner}
                 </span>
               </div>
 
-              <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-                <span className="text-slate-500 text-[10px] block">Chain Link Integrity:</span>
+              <div className="bg-paper-sunken p-2.5 rounded-xl border border-line">
+                <span className="text-ink-faint text-[10px] block">Chain Link Integrity:</span>
                 <span
                   className={`font-semibold ${
-                    block.status === 'VERIFIED' ? 'text-emerald-400' : 'text-rose-400'
+                    block.status === 'VERIFIED' ? 'text-green-800' : 'text-rose-700'
                   }`}
                 >
                   {block.status === 'VERIFIED' ? 'Merkle Proof Valid' : 'POINTER MISMATCH'}
@@ -205,13 +205,13 @@ export const CryptoLedgerView: React.FC = () => {
             </div>
 
             {/* Hashes */}
-            <div className="mt-3 pt-3 border-t border-slate-800/60 space-y-1 text-[11px] font-mono">
-              <div className="flex items-center space-x-2 text-slate-400 truncate">
-                <span className="text-slate-500 shrink-0">Previous Hash:</span>
-                <span className="text-slate-400 truncate">{block.previous_hash}</span>
+            <div className="mt-3 pt-3 border-t border-line space-y-1 text-[11px] font-mono">
+              <div className="flex items-center space-x-2 text-ink-muted truncate">
+                <span className="text-ink-faint shrink-0">Previous Hash:</span>
+                <span className="text-ink-faint truncate">{block.previous_hash}</span>
               </div>
-              <div className="flex items-center space-x-2 text-teal-400 truncate font-semibold">
-                <span className="text-slate-500 shrink-0">Block Hash:</span>
+              <div className="flex items-center space-x-2 text-forest font-semibold truncate">
+                <span className="text-ink-faint shrink-0">Block Hash:</span>
                 <span className="truncate">{block.block_hash}</span>
               </div>
             </div>

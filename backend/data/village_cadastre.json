@@ -3,7 +3,9 @@
   "name": "Mayaganahalli_Village_Cadastre",
   "crs": {
     "type": "name",
-    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
   },
   "features": [
     {
@@ -37,11 +39,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2801, 12.7230],
-            [77.2812, 12.7230],
-            [77.2813, 12.7221],
-            [77.2802, 12.7220],
-            [77.2801, 12.7230]
+            [
+              77.2801,
+              12.723
+            ],
+            [
+              77.2812,
+              12.723
+            ],
+            [
+              77.2813,
+              12.7221
+            ],
+            [
+              77.2802,
+              12.722
+            ],
+            [
+              77.2801,
+              12.723
+            ]
           ]
         ]
       }
@@ -77,11 +94,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2812, 12.7230],
-            [77.2821, 12.7231],
-            [77.2822, 12.7222],
-            [77.2813, 12.7221],
-            [77.2812, 12.7230]
+            [
+              77.2812,
+              12.723
+            ],
+            [
+              77.2821,
+              12.7231
+            ],
+            [
+              77.2822,
+              12.7222
+            ],
+            [
+              77.2813,
+              12.7221
+            ],
+            [
+              77.2812,
+              12.723
+            ]
           ]
         ]
       }
@@ -117,11 +149,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2821, 12.7231],
-            [77.2830, 12.7231],
-            [77.2831, 12.7223],
-            [77.2822, 12.7222],
-            [77.2821, 12.7231]
+            [
+              77.2821,
+              12.7231
+            ],
+            [
+              77.283,
+              12.7231
+            ],
+            [
+              77.2831,
+              12.7223
+            ],
+            [
+              77.2822,
+              12.7222
+            ],
+            [
+              77.2821,
+              12.7231
+            ]
           ]
         ]
       }
@@ -157,11 +204,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2800, 12.7218],
-            [77.2815, 12.7218],
-            [77.2816, 12.7208],
-            [77.2801, 12.7207],
-            [77.2800, 12.7218]
+            [
+              77.28,
+              12.7218
+            ],
+            [
+              77.2815,
+              12.7218
+            ],
+            [
+              77.2816,
+              12.7208
+            ],
+            [
+              77.2801,
+              12.7207
+            ],
+            [
+              77.28,
+              12.7218
+            ]
           ]
         ]
       }
@@ -198,11 +260,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2815, 12.7218],
-            [77.2832, 12.7219],
-            [77.2830, 12.7206],
-            [77.2816, 12.7208],
-            [77.2815, 12.7218]
+            [
+              77.2815,
+              12.7218
+            ],
+            [
+              77.2832,
+              12.7219
+            ],
+            [
+              77.283,
+              12.7206
+            ],
+            [
+              77.2816,
+              12.7208
+            ],
+            [
+              77.2815,
+              12.7218
+            ]
           ]
         ]
       }
@@ -239,11 +316,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2785, 12.7229],
-            [77.2798, 12.7229],
-            [77.2799, 12.7216],
-            [77.2786, 12.7215],
-            [77.2785, 12.7229]
+            [
+              77.2785,
+              12.7229
+            ],
+            [
+              77.2798,
+              12.7229
+            ],
+            [
+              77.2799,
+              12.7216
+            ],
+            [
+              77.2786,
+              12.7215
+            ],
+            [
+              77.2785,
+              12.7229
+            ]
           ]
         ]
       }
@@ -263,11 +355,26 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2825, 12.7215],
-            [77.2845, 12.7215],
-            [77.2848, 12.7198],
-            [77.2826, 12.7200],
-            [77.2825, 12.7215]
+            [
+              77.2825,
+              12.7215
+            ],
+            [
+              77.2845,
+              12.7215
+            ],
+            [
+              77.2848,
+              12.7198
+            ],
+            [
+              77.2826,
+              12.72
+            ],
+            [
+              77.2825,
+              12.7215
+            ]
           ]
         ]
       }
@@ -287,11 +394,1306 @@
         "type": "Polygon",
         "coordinates": [
           [
-            [77.2770, 12.7240],
-            [77.2783, 12.7240],
-            [77.2783, 12.7210],
-            [77.2770, 12.7210],
-            [77.2770, 12.7240]
+            [
+              77.277,
+              12.724
+            ],
+            [
+              77.2783,
+              12.724
+            ],
+            [
+              77.2783,
+              12.721
+            ],
+            [
+              77.277,
+              12.721
+            ],
+            [
+              77.277,
+              12.724
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_01",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-120",
+        "hissa_no": "1",
+        "display_survey": "DEMO-120/1",
+        "village": "Kadakola",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 16.8,
+        "extent_sq_meters": 5746.54,
+        "land_class": "AGRICULTURAL",
+        "khatedar_name": "Demo Owner 01",
+        "father_name": "Demo Father 01",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 850000,
+        "ulpin": "DEMO-KA-MYS-0001",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 8,
+        "mismatch_type": null,
+        "cadastral_area_acres": 1.42,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.692,
+                12.177
+              ],
+              [
+                76.6929,
+                12.177
+              ],
+              [
+                76.6929,
+                12.17775
+              ],
+              [
+                76.692,
+                12.17775
+              ],
+              [
+                76.692,
+                12.177
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_02",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-121",
+        "hissa_no": "2",
+        "display_survey": "DEMO-121/2",
+        "village": "Kadakola",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 4.0,
+        "extent_sq_meters": 8498.4,
+        "land_class": "DRY_CROP",
+        "khatedar_name": "Demo Owner 02",
+        "father_name": "Demo Father 02",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 925000,
+        "ulpin": "DEMO-KA-MYS-0002",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 9,
+        "mismatch_type": null,
+        "cadastral_area_acres": 2.1,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.69359999999999,
+                12.177
+              ],
+              [
+                76.69457999999999,
+                12.177
+              ],
+              [
+                76.69457999999999,
+                12.17781
+              ],
+              [
+                76.69359999999999,
+                12.17781
+              ],
+              [
+                76.69359999999999,
+                12.177
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_03",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-122",
+        "hissa_no": "3",
+        "display_survey": "DEMO-122/3",
+        "village": "Kadakola",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 0,
+        "extent_guntas": 34.4,
+        "extent_sq_meters": 3480.3,
+        "land_class": "IRRIGATED",
+        "khatedar_name": "Demo Owner 03",
+        "father_name": "Demo Father 03",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 1000000,
+        "ulpin": "DEMO-KA-MYS-0003",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 10,
+        "mismatch_type": null,
+        "cadastral_area_acres": 0.86,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.6952,
+                12.177
+              ],
+              [
+                76.69626,
+                12.177
+              ],
+              [
+                76.69626,
+                12.17787
+              ],
+              [
+                76.6952,
+                12.17787
+              ],
+              [
+                76.6952,
+                12.177
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_04",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-123",
+        "hissa_no": "4",
+        "display_survey": "DEMO-123/4",
+        "village": "Kadakola",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 3,
+        "extent_guntas": 10.0,
+        "extent_sq_meters": 13152.28,
+        "land_class": "RESIDENTIAL_AGRI",
+        "khatedar_name": "Demo Owner 04",
+        "father_name": "Demo Father 04",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 1075000,
+        "ulpin": "DEMO-KA-MYS-0004",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 11,
+        "mismatch_type": null,
+        "cadastral_area_acres": 3.25,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.6968,
+                12.177
+              ],
+              [
+                76.6977,
+                12.177
+              ],
+              [
+                76.6977,
+                12.17793
+              ],
+              [
+                76.6968,
+                12.17793
+              ],
+              [
+                76.6968,
+                12.177
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_05",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-124",
+        "hissa_no": "1",
+        "display_survey": "DEMO-124/1",
+        "village": "Kadakola",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 30.0,
+        "extent_sq_meters": 7082.0,
+        "land_class": "AGRICULTURAL",
+        "khatedar_name": "Demo Owner 05",
+        "father_name": "Demo Father 05",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 1150000,
+        "ulpin": "DEMO-KA-MYS-0005",
+        "status": "AREA_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "UNDER_DEMO_REVIEW",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 48,
+        "mismatch_type": "AREA_INFLATION",
+        "cadastral_area_acres": 1.75,
+        "deed_area_acres": 3.9,
+        "area_difference_percent": 20.0,
+        "dispute_reason": "Demo deed area exceeds the synthetic cadastral area by 20.0%."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.69839999999999,
+                12.177
+              ],
+              [
+                76.69937999999999,
+                12.177
+              ],
+              [
+                76.69937999999999,
+                12.17775
+              ],
+              [
+                76.69839999999999,
+                12.17775
+              ],
+              [
+                76.69839999999999,
+                12.177
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_06",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-125",
+        "hissa_no": "2",
+        "display_survey": "DEMO-125/2",
+        "village": "Suttur",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 24.0,
+        "extent_sq_meters": 10521.83,
+        "land_class": "DRY_CROP",
+        "khatedar_name": "Demo Owner 06",
+        "father_name": "Demo Father 06",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 850000,
+        "ulpin": "DEMO-KA-MYS-0006",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 13,
+        "mismatch_type": null,
+        "cadastral_area_acres": 2.6,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.705,
+                12.1844
+              ],
+              [
+                76.70606,
+                12.1844
+              ],
+              [
+                76.70606,
+                12.18521
+              ],
+              [
+                76.705,
+                12.18521
+              ],
+              [
+                76.705,
+                12.1844
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_07",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-126",
+        "hissa_no": "3",
+        "display_survey": "DEMO-126/3",
+        "village": "Suttur",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 0,
+        "extent_guntas": 38.0,
+        "extent_sq_meters": 3844.51,
+        "land_class": "IRRIGATED",
+        "khatedar_name": "Demo Owner 07",
+        "father_name": "Demo Father 07",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 925000,
+        "ulpin": "DEMO-KA-MYS-0007",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 14,
+        "mismatch_type": null,
+        "cadastral_area_acres": 0.95,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.7066,
+                12.1844
+              ],
+              [
+                76.7075,
+                12.1844
+              ],
+              [
+                76.7075,
+                12.185270000000001
+              ],
+              [
+                76.7066,
+                12.185270000000001
+              ],
+              [
+                76.7066,
+                12.1844
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_08",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-127",
+        "hissa_no": "4",
+        "display_survey": "DEMO-127/4",
+        "village": "Suttur",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 4,
+        "extent_guntas": 4.0,
+        "extent_sq_meters": 16592.11,
+        "land_class": "RESIDENTIAL_AGRI",
+        "khatedar_name": "Demo Owner 08",
+        "father_name": "Demo Father 08",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 1000000,
+        "ulpin": "DEMO-KA-MYS-0008",
+        "status": "BOUNDARY_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "UNDER_DEMO_REVIEW",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 51,
+        "mismatch_type": "BOUNDARY_OVERLAP",
+        "cadastral_area_acres": 4.1,
+        "deed_area_acres": 4.65,
+        "area_difference_percent": 13.4,
+        "dispute_reason": "Demo deed polygon overlaps an adjacent synthetic parcel by 13.4%."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.7082,
+                12.1844
+              ],
+              [
+                76.70918,
+                12.1844
+              ],
+              [
+                76.70918,
+                12.18533
+              ],
+              [
+                76.7082,
+                12.18533
+              ],
+              [
+                76.7082,
+                12.1844
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_09",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-128",
+        "hissa_no": "1",
+        "display_survey": "DEMO-128/1",
+        "village": "Suttur",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 13.2,
+        "extent_sq_meters": 5382.32,
+        "land_class": "AGRICULTURAL",
+        "khatedar_name": "Demo Owner 09",
+        "father_name": "Demo Father 09",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 1075000,
+        "ulpin": "DEMO-KA-MYS-0009",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 16,
+        "mismatch_type": null,
+        "cadastral_area_acres": 1.33,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.7098,
+                12.1844
+              ],
+              [
+                76.71086,
+                12.1844
+              ],
+              [
+                76.71086,
+                12.18515
+              ],
+              [
+                76.7098,
+                12.18515
+              ],
+              [
+                76.7098,
+                12.1844
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_10",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-129",
+        "hissa_no": "2",
+        "display_survey": "DEMO-129/2",
+        "village": "Suttur",
+        "hobli": "Demo Hobli",
+        "taluk": "Nanjangud",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 34.0,
+        "extent_sq_meters": 11533.54,
+        "land_class": "DRY_CROP",
+        "khatedar_name": "Demo Owner 10",
+        "father_name": "Demo Father 10",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 1150000,
+        "ulpin": "DEMO-KA-MYS-0010",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 17,
+        "mismatch_type": null,
+        "cadastral_area_acres": 2.85,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.7114,
+                12.1844
+              ],
+              [
+                76.7123,
+                12.1844
+              ],
+              [
+                76.7123,
+                12.18521
+              ],
+              [
+                76.7114,
+                12.18521
+              ],
+              [
+                76.7114,
+                12.1844
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_11",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-130",
+        "hissa_no": "3",
+        "display_survey": "DEMO-130/3",
+        "village": "Ilavala Hobli",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 24.0,
+        "extent_sq_meters": 6474.97,
+        "land_class": "IRRIGATED",
+        "khatedar_name": "Demo Owner 11",
+        "father_name": "Demo Father 11",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 850000,
+        "ulpin": "DEMO-KA-MYS-0011",
+        "status": "AREA_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "UNDER_DEMO_REVIEW",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 57,
+        "mismatch_type": "AREA_INFLATION",
+        "cadastral_area_acres": 1.6,
+        "deed_area_acres": 3.48,
+        "area_difference_percent": 21.0,
+        "dispute_reason": "Demo deed area exceeds the synthetic cadastral area by 21.0%."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.57,
+                12.3678
+              ],
+              [
+                76.57097999999999,
+                12.3678
+              ],
+              [
+                76.57097999999999,
+                12.368670000000002
+              ],
+              [
+                76.57,
+                12.368670000000002
+              ],
+              [
+                76.57,
+                12.3678
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_12",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-131",
+        "hissa_no": "4",
+        "display_survey": "DEMO-131/4",
+        "village": "Ilavala Hobli",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 3,
+        "extent_guntas": 16.0,
+        "extent_sq_meters": 13759.31,
+        "land_class": "RESIDENTIAL_AGRI",
+        "khatedar_name": "Demo Owner 12",
+        "father_name": "Demo Father 12",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 925000,
+        "ulpin": "DEMO-KA-MYS-0012",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 19,
+        "mismatch_type": null,
+        "cadastral_area_acres": 3.4,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.57159999999999,
+                12.3678
+              ],
+              [
+                76.57265999999998,
+                12.3678
+              ],
+              [
+                76.57265999999998,
+                12.368730000000001
+              ],
+              [
+                76.57159999999999,
+                12.368730000000001
+              ],
+              [
+                76.57159999999999,
+                12.3678
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_13",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-132",
+        "hissa_no": "1",
+        "display_survey": "DEMO-132/1",
+        "village": "Ilavala Hobli",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 0,
+        "extent_guntas": 28.8,
+        "extent_sq_meters": 2913.74,
+        "land_class": "AGRICULTURAL",
+        "khatedar_name": "Demo Owner 13",
+        "father_name": "Demo Father 13",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 1000000,
+        "ulpin": "DEMO-KA-MYS-0013",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 8,
+        "mismatch_type": null,
+        "cadastral_area_acres": 0.72,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5732,
+                12.3678
+              ],
+              [
+                76.5741,
+                12.3678
+              ],
+              [
+                76.5741,
+                12.36855
+              ],
+              [
+                76.5732,
+                12.36855
+              ],
+              [
+                76.5732,
+                12.3678
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_14",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-133",
+        "hissa_no": "2",
+        "display_survey": "DEMO-133/2",
+        "village": "Ilavala Hobli",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 10.0,
+        "extent_sq_meters": 9105.43,
+        "land_class": "DRY_CROP",
+        "khatedar_name": "Demo Owner 14",
+        "father_name": "Demo Father 14",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 1075000,
+        "ulpin": "DEMO-KA-MYS-0014",
+        "status": "DISPUTED",
+        "has_dispute": true,
+        "encumbrance_status": "DEMO_REVIEW_REQUIRED",
+        "risk_level": "HIGH_RISK",
+        "risk_score": 62,
+        "mismatch_type": "PROHIBITED_ZONE_OVERLAP",
+        "cadastral_area_acres": 2.25,
+        "deed_area_acres": 0.84,
+        "area_difference_percent": 16.2,
+        "dispute_reason": "Demo parcel intersects a synthetic prohibited-zone buffer by 16.2%."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5748,
+                12.3678
+              ],
+              [
+                76.57578,
+                12.3678
+              ],
+              [
+                76.57578,
+                12.36861
+              ],
+              [
+                76.5748,
+                12.36861
+              ],
+              [
+                76.5748,
+                12.3678
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_15",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-134",
+        "hissa_no": "3",
+        "display_survey": "DEMO-134/3",
+        "village": "Ilavala Hobli",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 36.0,
+        "extent_sq_meters": 7689.03,
+        "land_class": "IRRIGATED",
+        "khatedar_name": "Demo Owner 15",
+        "father_name": "Demo Father 15",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 1150000,
+        "ulpin": "DEMO-KA-MYS-0015",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 10,
+        "mismatch_type": null,
+        "cadastral_area_acres": 1.9,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.57639999999999,
+                12.3678
+              ],
+              [
+                76.57745999999999,
+                12.3678
+              ],
+              [
+                76.57745999999999,
+                12.368670000000002
+              ],
+              [
+                76.57639999999999,
+                12.368670000000002
+              ],
+              [
+                76.57639999999999,
+                12.3678
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_16",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-135",
+        "hissa_no": "4",
+        "display_survey": "DEMO-135/4",
+        "village": "Hunsur Road",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 3,
+        "extent_guntas": 30.0,
+        "extent_sq_meters": 15175.71,
+        "land_class": "RESIDENTIAL_AGRI",
+        "khatedar_name": "Demo Owner 16",
+        "father_name": "Demo Father 16",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 850000,
+        "ulpin": "DEMO-KA-MYS-0016",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 11,
+        "mismatch_type": null,
+        "cadastral_area_acres": 3.75,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.565,
+                12.3292
+              ],
+              [
+                76.5659,
+                12.3292
+              ],
+              [
+                76.5659,
+                12.33013
+              ],
+              [
+                76.565,
+                12.33013
+              ],
+              [
+                76.565,
+                12.3292
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_17",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-136",
+        "hissa_no": "1",
+        "display_survey": "DEMO-136/1",
+        "village": "Hunsur Road",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 7.2,
+        "extent_sq_meters": 4775.29,
+        "land_class": "AGRICULTURAL",
+        "khatedar_name": "Demo Owner 17",
+        "father_name": "Demo Father 17",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 925000,
+        "ulpin": "DEMO-KA-MYS-0017",
+        "status": "AREA_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "UNDER_DEMO_REVIEW",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 51,
+        "mismatch_type": "AREA_REDUCTION",
+        "cadastral_area_acres": 1.18,
+        "deed_area_acres": 3.1,
+        "area_difference_percent": -17.3,
+        "dispute_reason": "Demo deed area is 17.3% smaller than the synthetic cadastral area."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5666,
+                12.3292
+              ],
+              [
+                76.56757999999999,
+                12.3292
+              ],
+              [
+                76.56757999999999,
+                12.32995
+              ],
+              [
+                76.5666,
+                12.32995
+              ],
+              [
+                76.5666,
+                12.3292
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_18",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-137",
+        "hissa_no": "2",
+        "display_survey": "DEMO-137/2",
+        "village": "Hunsur Road",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 19.2,
+        "extent_sq_meters": 10036.2,
+        "land_class": "DRY_CROP",
+        "khatedar_name": "Demo Owner 18",
+        "father_name": "Demo Father 18",
+        "soil_class": "BLACK_SOIL",
+        "guideline_rate_per_acre": 1000000,
+        "ulpin": "DEMO-KA-MYS-0018",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 13,
+        "mismatch_type": null,
+        "cadastral_area_acres": 2.48,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5682,
+                12.3292
+              ],
+              [
+                76.56926,
+                12.3292
+              ],
+              [
+                76.56926,
+                12.33001
+              ],
+              [
+                76.5682,
+                12.33001
+              ],
+              [
+                76.5682,
+                12.3292
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_19",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-138",
+        "hissa_no": "3",
+        "display_survey": "DEMO-138/3",
+        "village": "Hunsur Road",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 2.0,
+        "extent_sq_meters": 4249.2,
+        "land_class": "IRRIGATED",
+        "khatedar_name": "Demo Owner 19",
+        "father_name": "Demo Father 19",
+        "soil_class": "RED_LOAM",
+        "guideline_rate_per_acre": 1075000,
+        "ulpin": "DEMO-KA-MYS-0019",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NONE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 14,
+        "mismatch_type": null,
+        "cadastral_area_acres": 1.05,
+        "deed_area_acres": null,
+        "area_difference_percent": null,
+        "dispute_reason": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5698,
+                12.3292
+              ],
+              [
+                76.5707,
+                12.3292
+              ],
+              [
+                76.5707,
+                12.330070000000001
+              ],
+              [
+                76.5698,
+                12.330070000000001
+              ],
+              [
+                76.5698,
+                12.3292
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "MYSURU_DEMO_20",
+      "properties": {
+        "record_type": "SYNTHETIC_DEMO",
+        "data_notice": "Synthetic demo record; not an official land record or cadastral boundary.",
+        "survey_no": "DEMO-139",
+        "hissa_no": "4",
+        "display_survey": "DEMO-139/4",
+        "village": "Hunsur Road",
+        "hobli": "Demo Hobli",
+        "taluk": "Mysuru",
+        "district": "Mysuru",
+        "state": "Karnataka",
+        "extent_acres": 3,
+        "extent_guntas": 2.0,
+        "extent_sq_meters": 12342.91,
+        "land_class": "RESIDENTIAL_AGRI",
+        "khatedar_name": "Demo Owner 20",
+        "father_name": "Demo Father 20",
+        "soil_class": "RED_SANDY_LOAM",
+        "guideline_rate_per_acre": 1150000,
+        "ulpin": "DEMO-KA-MYS-0020",
+        "status": "DISPUTED",
+        "has_dispute": true,
+        "encumbrance_status": "DEMO_REVIEW_REQUIRED",
+        "risk_level": "HIGH_RISK",
+        "risk_score": 71,
+        "mismatch_type": "BOUNDARY_MISMATCH",
+        "cadastral_area_acres": 3.05,
+        "deed_area_acres": 1.31,
+        "area_difference_percent": 24.8,
+        "dispute_reason": "Demo boundary differs from the synthetic reference geometry by 24.8%."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              [
+                76.5714,
+                12.3292
+              ],
+              [
+                76.57238,
+                12.3292
+              ],
+              [
+                76.57238,
+                12.33013
+              ],
+              [
+                76.5714,
+                12.33013
+              ],
+              [
+                76.5714,
+                12.3292
+              ]
+            ]
           ]
         ]
       }

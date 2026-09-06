@@ -6,6 +6,7 @@ Loads serialized models:
 """
 
 import os
+import re
 import joblib
 import numpy as np
 from typing import Dict, Any, List
@@ -34,17 +35,87 @@ def get_risk_bundle():
     return _risk_bundle
 
 
+def normalize_content_text(text: str) -> str:
+    if not text:
+        return ""
+    normalized = text.lower()
+    normalized = normalized.replace("\r", " ").replace("\n", " ")
+    normalized = re.sub(r"\s+", " ", normalized)
+    return normalized.strip()
+
+
+def classify_document_content(text: str) -> Dict[str, Any]:
+    normalized = normalize_content_text(text)
+    if not normalized:
+        return {"document_type": "UNKNOWN", "display_name": "Unable to verify document type", "confidence": 0.0}
+
+    sale_terms = [
+        "sale deed", "deed of sale", "absolute sale deed", "registered sale deed",
+        "purchaser", "buyer", "vendor", "seller", "consideration", "sale consideration",
+        "registered deed number", "execution date", "property conveyed", "deed number",
+        "transfer of ownership", "sale agreement", "purchase agreement", "vendee", "vendor",
+    ]
+    ror_terms = [
+        "record of rights", "ror", "7/12", "7-12", "rtc", "khata", "khatedar", "mutation number",
+        "recorded holder", "revenue record", "land record", "pahani", "mutation", "register extract",
+        "ownership record", "tenant details", "cultivation details", "revenue office",
+    ]
+    survey_terms = [
+        "survey number", "hissa", "subdivision", "cadastral", "survey sketch", "parcel",
+        "boundary description", "measured area", "survey map", "land map", "survey plan",
+        "boundaries", "plot number", "khasra", "sy no", "survey no"
+    ]
+
+    def score(terms: List[str]) -> int:
+        score_value = 0
+        for term in terms:
+            if term in normalized:
+                score_value += 2
+        return score_value
+
+    sale_score = score(sale_terms)
+    ror_score = score(ror_terms)
+    survey_score = score(survey_terms)
+
+    results = [
+        ("SALE_DEED", sale_score, "Registered Absolute Sale Deed"),
+        ("ROR_RTC_712", ror_score, "Record of Rights / RTC / 7-12"),
+        ("SURVEY_DOCUMENT", survey_score, "Survey Document / Cadastral Map"),
+    ]
+    best_type, best_score, display_name = max(results, key=lambda item: item[1])
+
+    if best_score <= 0:
+        return {"document_type": "UNKNOWN", "display_name": "Unable to verify document type", "confidence": 0.0}
+
+    if best_type == "SALE_DEED":
+        confidence = min(0.99, 0.6 + (best_score / 22.0))
+    elif best_type == "ROR_RTC_712":
+        confidence = min(0.99, 0.6 + (best_score / 18.0))
+    else:
+        confidence = min(0.99, 0.58 + (best_score / 20.0))
+
+    return {
+        "document_type": best_type,
+        "display_name": display_name,
+        "confidence": round(confidence, 4),
+    }
+
+
 def classify_document(text: str) -> Dict[str, Any]:
+    content_guess = classify_document_content(text)
+    if content_guess["document_type"] != "UNKNOWN":
+        return content_guess
+
     clf = get_doc_classifier()
     if not clf:
-        return {"document_type": "SALE_DEED", "confidence": 0.95}
+        return {"document_type": "SALE_DEED", "display_name": "Registered Absolute Sale Deed", "confidence": 0.95}
 
     pred = clf.predict([text])[0]
     probs = clf.predict_proba([text])[0]
     confidence = float(np.max(probs))
 
     display_names = {
-        "SALE_DEED": "Registered Absolute Sale Deed (ಕ್ರಯ ಪತ್ರ / विक्रय विलेख)",
+        "SALE_DEED": "Registered Absolute Sale Deed (ক্রಯ ಪತ್ರ / विक्रय विलेख)",
         "ROR_RTC_712": "Record of Rights / RTC Pahani / 7-12 (ಹಕ್ಕು ದಾಖಲೆ / सात-बारा)",
         "PARTITION_DEED": "Family Partition Deed (ವಿಭಾಗ ಪತ್ರ / बँटवारा विलेख)",
         "GIFT_DEED": "Deed of Gift / Danapatra (ದಾನ ಪತ್ರ / दान पत्र)",

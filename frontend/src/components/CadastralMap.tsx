@@ -1,17 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { CADASTRE_DATA } from '../data/cadastreGeoJson';
-import { Search, Eye, ShieldAlert, Maximize2 } from 'lucide-react';
+import { CADASTRE_DATA, findCadastralParcel, normalizeSurveyToken } from '../data/cadastreGeoJson';
+import { Search, Eye, ShieldAlert, Maximize2, ArrowLeft } from 'lucide-react';
 
 interface CadastralMapProps {
   selectedSurvey?: string;
   onSelectParcel?: (surveyNo: string, hissaNo: string) => void;
   highlightStatus?: 'LOW_RISK' | 'MODERATE_RISK' | 'HIGH_RISK';
+  isCitizenView?: boolean;
+  onBack?: () => void;
 }
 
 export const CadastralMap: React.FC<CadastralMapProps> = ({
-  selectedSurvey = '42/1',
+  selectedSurvey = '',
   onSelectParcel,
+  isCitizenView = false,
+  onBack,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -21,6 +25,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
   const [basemap, setBasemap] = useState<'carto' | 'satellite'>('carto');
   const [searchQuery, setSearchQuery] = useState('');
   const [showProhibitedZones, setShowProhibitedZones] = useState(true);
+  const [parcelLookupMessage, setParcelLookupMessage] = useState<string>('');
 
   // Initialize Leaflet Map
   useEffect(() => {
@@ -49,7 +54,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
 
     // Add Tile Layer
     if (basemap === 'carto') {
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO &bull; DILRMP Cadastre',
         maxZoom: 20,
       }).addTo(map);
@@ -134,18 +139,35 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
           return;
         }
 
+        const isCurrentSelected =
+          props.display_survey === selectedSurvey ||
+          `${props.survey_no}/${props.hissa_no}` === selectedSurvey;
+
         // Tooltip
-        layer.bindTooltip(
-          `<div class="p-1 text-xs">
-            <strong class="text-emerald-400">Survey No. ${props.display_survey}</strong><br/>
-            <span>Khatedar: ${props.khatedar_name}</span><br/>
-            <span>Extent: ${props.extent_acres}A ${props.extent_guntas}G</span>
-          </div>`,
-          { sticky: true }
-        );
+        if (isCitizenView && !isCurrentSelected) {
+          layer.bindTooltip(
+            `<div class="p-1 text-xs">
+              <strong style="color:#1b4d3e">Survey No. ${props.display_survey}</strong><br/>
+              <span style="color:#7a9184">Adjacent Boundary Parcel</span>
+            </div>`,
+            { sticky: true }
+          );
+        } else {
+          layer.bindTooltip(
+            `<div class="p-1 text-xs">
+              <strong style="color:#1b4d3e">Survey No. ${props.display_survey}</strong><br/>
+              <span>Khatedar: ${props.khatedar_name}</span><br/>
+              <span>Extent: ${props.extent_acres}A ${props.extent_guntas}G</span>
+            </div>`,
+            { sticky: true }
+          );
+        }
 
         // Click handler
         layer.on('click', () => {
+          if (isCitizenView && !isCurrentSelected) {
+            return; // Protect neighbor privacy in citizen view
+          }
           setActiveParcel(props);
           if (onSelectParcel) {
             onSelectParcel(props.survey_no, (props.hissa_no || '0').toString());
@@ -156,41 +178,44 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
 
     geojsonLayerRef.current = geoLayer;
 
-    // If selectedSurvey provided, auto-select details
-    const matched = CADASTRE_DATA.features.find(
-      (f: any) =>
-        f.properties.display_survey === selectedSurvey ||
-        `${f.properties.survey_no}/${f.properties.hissa_no}` === selectedSurvey
-    );
+    // If selectedSurvey provided, auto-select details and zoom
+    const matched = findCadastralParcel(selectedSurvey);
     if (matched) {
       setActiveParcel(matched.properties);
+      setParcelLookupMessage('');
+      if (isCitizenView && matched.geometry?.coordinates?.[0]) {
+        const geom = matched.geometry.coordinates[0];
+        const bounds = L.latLngBounds(geom.map((coord: any) => [coord[1], coord[0]]));
+        map.fitBounds(bounds, { maxZoom: 18, padding: [60, 60] });
+      }
+    } else if (selectedSurvey) {
+      setActiveParcel(null);
+      setParcelLookupMessage(`Cadastral parcel data unavailable for Survey ${selectedSurvey}.`);
+    } else {
+      setActiveParcel(null);
+      setParcelLookupMessage('No cadastral parcel selected.');
     }
-  }, [basemap, selectedSurvey, showProhibitedZones]);
+  }, [basemap, selectedSurvey, showProhibitedZones, isCitizenView]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim() || !mapInstanceRef.current) return;
 
-    const matched = CADASTRE_DATA.features.find((f: any) => {
-      const p = f.properties;
-      return (
-        p.display_survey?.toLowerCase() === searchQuery.trim().toLowerCase() ||
-        p.survey_no?.toString() === searchQuery.trim() ||
-        p.ulpin?.toLowerCase() === searchQuery.trim().toLowerCase() ||
-        p.khatedar_name?.toLowerCase().includes(searchQuery.trim().toLowerCase())
-      );
-    });
+    const matched = findCadastralParcel(searchQuery.trim());
 
     if (matched) {
       setActiveParcel(matched.properties);
+      setParcelLookupMessage('');
       if (onSelectParcel) {
-        onSelectParcel((matched.properties.survey_no || '42').toString(), (matched.properties.hissa_no || '0').toString());
+        onSelectParcel((matched.properties.survey_no || '0').toString(), (matched.properties.hissa_no || '0').toString());
       }
       const geom = matched.geometry.coordinates[0];
       const bounds = L.latLngBounds(geom.map((coord: any) => [coord[1], coord[0]]));
       mapInstanceRef.current.fitBounds(bounds, { maxZoom: 18, padding: [40, 40] });
     } else {
-      alert(`Survey parcel '${searchQuery}' not found in Mayaganahalli Village Cadastre.`);
+      setActiveParcel(null);
+      setParcelLookupMessage(`Cadastral parcel data unavailable for Survey ${searchQuery.trim()}.`);
+      alert(`Cadastral parcel data unavailable for Survey ${searchQuery.trim()}.`);
     }
   };
 
@@ -201,39 +226,62 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[640px] rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950 flex flex-col">
+    <div className="relative w-full h-[640px] rounded-2xl overflow-hidden border border-line shadow-[0_16px_40px_rgba(18,53,44,0.12)] bg-sand flex flex-col">
       {/* Top Map Control Bar */}
       <div className="absolute top-4 left-4 right-4 z-[1000] flex flex-wrap items-center justify-between gap-3 pointer-events-none">
-        {/* Search Bar */}
-        <form
-          onSubmit={handleSearch}
-          className="flex items-center bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700 shadow-xl pointer-events-auto"
-        >
-          <Search className="w-4 h-4 text-slate-400 mr-2" />
-          <input
-            type="text"
-            placeholder="Search Survey No (e.g. 42/1, 88/2, 104) or ULPIN..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none w-56 sm:w-72"
-          />
-          <button
-            type="submit"
-            className="ml-2 px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-[11px] font-semibold text-white rounded-lg transition"
+        <div className="flex items-center gap-2 pointer-events-auto">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-paper-raised/95 px-3 py-1.5 text-xs font-semibold text-forest-deep shadow-xl transition hover:bg-sage-mist"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Go Back</span>
+            </button>
+          )}
+        </div>
+
+        {/* Search Bar (Officer) vs Validated Parcel Indicator (Citizen) */}
+        {!isCitizenView ? (
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center bg-paper-raised/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-line shadow-xl pointer-events-auto"
           >
-            Locate
-          </button>
-        </form>
+            <Search className="w-4 h-4 text-ink-faint mr-2" />
+            <input
+              type="text"
+              placeholder="Search Survey No (e.g. 42/1, 88/2, 104) or ULPIN..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-transparent text-xs text-ink placeholder-ink-faint focus:outline-none w-56 sm:w-72"
+            />
+            <button
+              type="submit"
+              className="ml-2 px-2.5 py-1 bg-forest hover:bg-forest-mid text-[11px] font-semibold text-white rounded-lg transition"
+            >
+              Locate
+            </button>
+          </form>
+        ) : (
+          <div className="flex items-center bg-paper-raised/95 backdrop-blur-md px-4 py-2 rounded-xl border border-line shadow-xl pointer-events-auto">
+            <span className="w-2.5 h-2.5 rounded-full bg-forest mr-2 animate-pulse" />
+            <span className="text-xs font-bold text-forest-deep">
+              Validated Parcel: Survey No. {selectedSurvey}
+            </span>
+            <span className="mx-2 text-ink-faint text-xs">•</span>
+            <span className="text-[11px] text-ink-muted">Mayaganahalli Village</span>
+          </div>
+        )}
 
         {/* Layer Controls */}
         <div className="flex items-center space-x-2 pointer-events-auto">
-          <div className="bg-slate-900/90 backdrop-blur-md p-1 rounded-xl border border-slate-700 shadow-xl flex items-center space-x-1">
+          <div className="bg-paper-raised/95 backdrop-blur-md p-1 rounded-xl border border-line shadow-xl flex items-center space-x-1">
             <button
               onClick={() => setBasemap('carto')}
               className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition ${
                 basemap === 'carto'
-                  ? 'bg-emerald-600 text-white'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-forest text-white'
+                  : 'text-ink-muted hover:text-forest-deep'
               }`}
             >
               Cadastre Vector
@@ -242,8 +290,8 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
               onClick={() => setBasemap('satellite')}
               className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition ${
                 basemap === 'satellite'
-                  ? 'bg-emerald-600 text-white'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-forest text-white'
+                  : 'text-ink-muted hover:text-forest-deep'
               }`}
             >
               Bhuvan Satellite
@@ -254,8 +302,8 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
             onClick={() => setShowProhibitedZones(!showProhibitedZones)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold border backdrop-blur-md shadow-xl flex items-center space-x-1.5 transition ${
               showProhibitedZones
-                ? 'bg-indigo-950/80 border-indigo-700 text-indigo-300'
-                : 'bg-slate-900/80 border-slate-700 text-slate-400'
+                ? 'bg-sage-mist/95 border-forest-mid text-forest'
+                : 'bg-paper-raised/80 border-line text-ink-faint'
             }`}
           >
             <Eye className="w-3.5 h-3.5" />
@@ -276,6 +324,15 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
       <div ref={mapContainerRef} className="w-full flex-1" />
 
       {/* Bottom Floating Parcel Inspector Card */}
+      {!activeParcel && parcelLookupMessage && (
+        <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-md z-[1000] bg-amber-950/95 border border-amber-700 rounded-2xl p-3 text-xs text-amber-200 shadow-xl">
+          <div className="flex items-start gap-2">
+            <ShieldAlert className="w-4 h-4 mt-0.5 text-amber-300 shrink-0" />
+            <span>{parcelLookupMessage}</span>
+          </div>
+        </div>
+      )}
+
       {activeParcel && (
         <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-md z-[1000] bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-2xl p-4 shadow-2xl animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="flex items-start justify-between">

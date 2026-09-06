@@ -66,32 +66,32 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[2000] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-white text-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-[2000] bg-forest-deep/55 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-paper-raised text-ink rounded-3xl shadow-2xl overflow-hidden border border-line animate-in fade-in zoom-in-95 duration-200">
         {/* Top Control Bar */}
-        <div className="bg-slate-900 text-white px-6 py-3 flex items-center justify-between">
-          <span className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 text-emerald-400">
+        <div className="bg-forest-deep text-white px-6 py-3 flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 text-sand">
             <ShieldCheck className="w-4 h-4" />
             <span>Digital India Bhu-Aadhaar Certificate Viewer</span>
           </span>
           <div className="flex items-center space-x-2">
             <button
               onClick={downloadPdf}
-              className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg flex items-center space-x-1 transition"
+              className="px-3 py-1 bg-forest hover:bg-forest-mid text-white text-xs font-semibold rounded-lg flex items-center space-x-1 transition"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download PDF</span>
             </button>
             <button
               onClick={() => window.print()}
-              className="p-1.5 hover:bg-slate-800 text-slate-300 rounded-lg transition"
+              className="p-1.5 hover:bg-white/10 text-sand rounded-lg transition"
               title="Print"
             >
               <Printer className="w-4 h-4" />
             </button>
             <button
               onClick={onClose}
-              className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-white rounded-lg transition"
+              className="p-1.5 hover:bg-white/10 text-sand hover:text-white rounded-lg transition"
             >
               <X className="w-4 h-4" />
             </button>
@@ -99,13 +99,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         </div>
 
         {/* Certificate Paper Canvas */}
-        <div className="p-8 sm:p-10 font-serif border-[12px] border-double border-slate-300 m-4 rounded-xl bg-gradient-to-b from-amber-50/20 via-white to-amber-50/10">
+        <div className="p-8 sm:p-10 font-serif border-[12px] border-double border-sand-warm m-4 rounded-xl bg-gradient-to-b from-sage-mist/40 via-paper-raised to-sand/30">
           {/* Header */}
-          <div className="text-center space-y-1 pb-4 border-b-2 border-slate-900">
+          <div className="text-center space-y-1 pb-4 border-b-2 border-forest-deep">
             <div className="flex justify-center mb-1">
-              <Award className="w-8 h-8 text-amber-600" />
+              <Award className="w-8 h-8 text-forest" />
             </div>
-            <h2 className="text-sm uppercase tracking-widest font-sans font-bold text-slate-600">
+            <h2 className="text-sm uppercase tracking-widest font-sans font-bold text-ink-muted">
               Government of Karnataka &bull; Department of Land Resources
             </h2>
             <h1 className="text-lg sm:text-xl font-bold font-sans tracking-tight text-slate-950">
@@ -122,7 +122,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               <span className="text-[10px] uppercase font-bold text-slate-500 block">
                 Bhu-Aadhaar (ULPIN)
               </span>
-              <span className="font-mono text-sm font-black text-emerald-700">
+              <span className="font-mono text-sm font-black text-forest">
                 {data.ulpin}
               </span>
             </div>
@@ -161,7 +161,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
             <div className="flex justify-between py-1 border-b border-slate-200">
               <span className="text-slate-500">Cadastral Survey Extent:</span>
-              <span className="font-bold text-emerald-800">
+              <span className="font-bold text-forest">
                 {data.spatial_verification.cadastre_extent.acres} Acres {data.spatial_verification.cadastre_extent.guntas} Guntas ({data.spatial_verification.cadastre_extent.sq_meters.toLocaleString()} sq.m)
               </span>
             </div>
@@ -170,7 +170,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
               <span
                 className={`font-bold ${
                   data.spatial_verification.area_discrepancy.within_legal_tolerance
-                    ? 'text-emerald-700'
+                    ? 'text-green-800'
                     : 'text-rose-700'
                 }`}
               >
@@ -183,7 +183,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="mt-6 pt-4 border-t-2 border-slate-300 flex items-center justify-between font-sans">
             <div className="flex items-center space-x-3">
               {/* Simulated QR Code */}
-              <div className="w-16 h-16 bg-slate-950 p-1 rounded-xl flex items-center justify-center">
+              <div className="w-16 h-16 bg-forest-deep p-1 rounded-xl flex items-center justify-center">
                 <QrCode className="w-12 h-12 text-white" />
               </div>
               <div className="text-[10px] text-slate-600">
@@ -196,7 +196,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
 
             <div className="text-right">
-              <div className="inline-block px-3 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-300 mb-1">
+              <div className="inline-block px-3 py-1 rounded-full text-xs font-black bg-green-100 text-green-900 border border-green-300 mb-1">
                 SCORE: {score.toFixed(0)} / 100 &bull; {data.ml_risk_assessment.risk_level}
               </div>
               <p className="text-[10px] text-slate-500 block">Digitally Certified by</p>

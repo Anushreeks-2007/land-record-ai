@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { CADASTRE_DATA } from '../data/cadastreGeoJson';
-import { Search, Eye, ShieldAlert, Maximize2 } from 'lucide-react';
+import { CADASTRE_DATA, findCadastralParcel, normalizeSurveyToken } from '../data/cadastreGeoJson';
+import { Search, Eye, ShieldAlert, Maximize2, ArrowLeft } from 'lucide-react';
 
 interface CadastralMapProps {
   selectedSurvey?: string;
   onSelectParcel?: (surveyNo: string, hissaNo: string) => void;
   highlightStatus?: 'LOW_RISK' | 'MODERATE_RISK' | 'HIGH_RISK';
   isCitizenView?: boolean;
+  onBack?: () => void;
 }
 
 export const CadastralMap: React.FC<CadastralMapProps> = ({
-  selectedSurvey = '42/1',
+  selectedSurvey = '',
   onSelectParcel,
   isCitizenView = false,
+  onBack,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -23,6 +25,7 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
   const [basemap, setBasemap] = useState<'carto' | 'satellite'>('carto');
   const [searchQuery, setSearchQuery] = useState('');
   const [showProhibitedZones, setShowProhibitedZones] = useState(true);
+  const [parcelLookupMessage, setParcelLookupMessage] = useState<string>('');
 
   // Initialize Leaflet Map
   useEffect(() => {
@@ -176,18 +179,21 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
     geojsonLayerRef.current = geoLayer;
 
     // If selectedSurvey provided, auto-select details and zoom
-    const matched = CADASTRE_DATA.features.find(
-      (f: any) =>
-        f.properties.display_survey === selectedSurvey ||
-        `${f.properties.survey_no}/${f.properties.hissa_no}` === selectedSurvey
-    );
+    const matched = findCadastralParcel(selectedSurvey);
     if (matched) {
       setActiveParcel(matched.properties);
+      setParcelLookupMessage('');
       if (isCitizenView && matched.geometry?.coordinates?.[0]) {
         const geom = matched.geometry.coordinates[0];
         const bounds = L.latLngBounds(geom.map((coord: any) => [coord[1], coord[0]]));
         map.fitBounds(bounds, { maxZoom: 18, padding: [60, 60] });
       }
+    } else if (selectedSurvey) {
+      setActiveParcel(null);
+      setParcelLookupMessage(`Cadastral parcel data unavailable for Survey ${selectedSurvey}.`);
+    } else {
+      setActiveParcel(null);
+      setParcelLookupMessage('No cadastral parcel selected.');
     }
   }, [basemap, selectedSurvey, showProhibitedZones, isCitizenView]);
 
@@ -195,26 +201,21 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
     e.preventDefault();
     if (!searchQuery.trim() || !mapInstanceRef.current) return;
 
-    const matched = CADASTRE_DATA.features.find((f: any) => {
-      const p = f.properties;
-      return (
-        p.display_survey?.toLowerCase() === searchQuery.trim().toLowerCase() ||
-        p.survey_no?.toString() === searchQuery.trim() ||
-        p.ulpin?.toLowerCase() === searchQuery.trim().toLowerCase() ||
-        p.khatedar_name?.toLowerCase().includes(searchQuery.trim().toLowerCase())
-      );
-    });
+    const matched = findCadastralParcel(searchQuery.trim());
 
     if (matched) {
       setActiveParcel(matched.properties);
+      setParcelLookupMessage('');
       if (onSelectParcel) {
-        onSelectParcel((matched.properties.survey_no || '42').toString(), (matched.properties.hissa_no || '0').toString());
+        onSelectParcel((matched.properties.survey_no || '0').toString(), (matched.properties.hissa_no || '0').toString());
       }
       const geom = matched.geometry.coordinates[0];
       const bounds = L.latLngBounds(geom.map((coord: any) => [coord[1], coord[0]]));
       mapInstanceRef.current.fitBounds(bounds, { maxZoom: 18, padding: [40, 40] });
     } else {
-      alert(`Survey parcel '${searchQuery}' not found in Mayaganahalli Village Cadastre.`);
+      setActiveParcel(null);
+      setParcelLookupMessage(`Cadastral parcel data unavailable for Survey ${searchQuery.trim()}.`);
+      alert(`Cadastral parcel data unavailable for Survey ${searchQuery.trim()}.`);
     }
   };
 
@@ -228,6 +229,18 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
     <div className="relative w-full h-[640px] rounded-2xl overflow-hidden border border-line shadow-[0_16px_40px_rgba(18,53,44,0.12)] bg-sand flex flex-col">
       {/* Top Map Control Bar */}
       <div className="absolute top-4 left-4 right-4 z-[1000] flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+        <div className="flex items-center gap-2 pointer-events-auto">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-paper-raised/95 px-3 py-1.5 text-xs font-semibold text-forest-deep shadow-xl transition hover:bg-sage-mist"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Go Back</span>
+            </button>
+          )}
+        </div>
+
         {/* Search Bar (Officer) vs Validated Parcel Indicator (Citizen) */}
         {!isCitizenView ? (
           <form
@@ -311,6 +324,15 @@ export const CadastralMap: React.FC<CadastralMapProps> = ({
       <div ref={mapContainerRef} className="w-full flex-1" />
 
       {/* Bottom Floating Parcel Inspector Card */}
+      {!activeParcel && parcelLookupMessage && (
+        <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-md z-[1000] bg-amber-950/95 border border-amber-700 rounded-2xl p-3 text-xs text-amber-200 shadow-xl">
+          <div className="flex items-start gap-2">
+            <ShieldAlert className="w-4 h-4 mt-0.5 text-amber-300 shrink-0" />
+            <span>{parcelLookupMessage}</span>
+          </div>
+        </div>
+      )}
+
       {activeParcel && (
         <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-md z-[1000] bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-2xl p-4 shadow-2xl animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="flex items-start justify-between">

@@ -19,8 +19,9 @@ export function App() {
   const [role, setRole] = useState<UserRole>('CITIZEN');
   const [lang, setLang] = useState<Language>('en');
   const [validationResult, setValidationResult] = useState<ValidationResponse>(INITIAL_VALIDATION_RESULT);
-  const [selectedSurveyForGis, setSelectedSurveyForGis] = useState<string>('42/1');
+  const [selectedSurveyForGis, setSelectedSurveyForGis] = useState<string>('');
   const [isCertificateOpen, setIsCertificateOpen] = useState<boolean>(false);
+  const [isCitizenValidated, setIsCitizenValidated] = useState<boolean>(false);
   const [backendOnline, setBackendOnline] = useState<boolean>(false);
 
   // Demo officer authentication session
@@ -45,6 +46,7 @@ export function App() {
 
   const handleSelectCitizenFromLanding = () => {
     setRole('CITIZEN');
+    setIsCitizenValidated(false);
     setCurrentView('citizen');
   };
 
@@ -82,7 +84,8 @@ export function App() {
         setLang={setLang}
         backendOnline={backendOnline}
         isOfficerAuthenticated={isOfficerAuthenticated}
-        onOpenCertificate={() => setIsCertificateOpen(true)}
+        onOpenCertificate={role === 'CITIZEN' && isCitizenValidated ? () => setIsCertificateOpen(true) : undefined}
+        isCitizenValidated={isCitizenValidated}
       />
 
       {/* Main Container */}
@@ -104,7 +107,12 @@ export function App() {
             lang={lang}
             onOpenGis={handleOpenGis}
             onOpenCertificate={() => setIsCertificateOpen(true)}
-            onBackToLanding={() => setCurrentView('landing')}
+            onBackToLanding={() => {
+              setIsCitizenValidated(false);
+              setCurrentView('landing');
+            }}
+            isCitizenValidated={isCitizenValidated}
+            setIsCitizenValidated={setIsCitizenValidated}
           />
         )}
 
@@ -168,6 +176,7 @@ export function App() {
                 const combined = h && h !== '0' ? `${s}/${h}` : s;
                 setSelectedSurveyForGis(combined);
               }}
+              onBack={() => setCurrentView(role === 'CITIZEN' ? 'citizen' : 'officer-dashboard')}
             />
           </div>
         )}

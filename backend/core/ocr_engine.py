@@ -14,6 +14,11 @@ from typing import Dict, Any, List, Optional
 import numpy as np
 from PIL import Image, ImageEnhance, ImageOps
 
+try:
+    import pypdf
+except Exception:  # pragma: no cover
+    pypdf = None
+
 # Regex patterns for Indian revenue terms
 SURVEY_PATTERNS = [
     r"(?:Survey\s*(?:No|Number|No\.)|ಸರ್ವೆ\s*ನಂ|ಖಸರಾ\s*ಸಂಖ್ಯ|खसरा\s*नं|Sy\s*No)[.:\s]*([0-9]+(?:\s*[\/\-]\s*[0-9]+)?)",
@@ -39,20 +44,54 @@ def preprocess_image(image_bytes: bytes) -> bytes:
     """
     try:
         img = Image.open(io.BytesIO(image_bytes))
-        # Convert to Grayscale
         gray = img.convert("L")
-        # Enhance Contrast
         enhancer = ImageEnhance.Contrast(gray)
         enhanced = enhancer.enhance(1.8)
-        # Binarize with threshold
         threshold = 145
         binarized = enhanced.point(lambda p: 255 if p > threshold else 0)
-        
+
         output_buffer = io.BytesIO()
         binarized.save(output_buffer, format="PNG")
         return output_buffer.getvalue()
-    except Exception as e:
+    except Exception:
         return image_bytes
+
+
+def extract_pdf_text(file_bytes: bytes) -> str:
+    """Extract text from a PDF using pypdf when available."""
+    if pypdf is None:
+        return ""
+
+    try:
+        reader = pypdf.PdfReader(io.BytesIO(file_bytes))
+        chunks: List[str] = []
+        for page in reader.pages:
+            text = page.extract_text() or ""
+            if text:
+                chunks.append(text)
+        return "\n".join(chunks)
+    except Exception:
+        return ""
+
+
+def extract_document_text(file_bytes: bytes, filename: str = "") -> str:
+    """"""
+    Return text from a PDF or image-backed source. Filename is never used as proof of type.
+    """
+    if not file_bytes:
+        return ""
+
+    if filename.lower().endswith(".pdf"):
+        text = extract_pdf_text(file_bytes)
+        if text:
+            return text
+
+    try:
+        img = Image.open(io.BytesIO(file_bytes))
+        text = f"{filename} {img.format or ''} {img.size}"
+        return text
+    except Exception:
+        return ""
 
 
 def extract_revenue_entities(raw_text: str) -> Dict[str, Any]:

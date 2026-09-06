@@ -24,6 +24,7 @@ interface NavbarProps {
   backendOnline: boolean;
   isOfficerAuthenticated: boolean;
   onOpenCertificate?: () => void;
+  isCitizenValidated?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -36,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   backendOnline,
   isOfficerAuthenticated,
   onOpenCertificate,
+  isCitizenValidated = false,
 }) => {
   const t = UI_STRINGS[lang];
 
@@ -176,37 +178,59 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
 
                 <button
-                  onClick={() => setCurrentView('gis')}
-                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
-                    currentView === 'gis'
-                      ? 'bg-forest-mid text-white shadow-md'
-                      : 'text-sand hover:text-white hover:bg-white/10'
+                  onClick={() => {
+                    if (!isCitizenValidated) return;
+                    setCurrentView('citizen');
+                    setTimeout(() => {
+                      document.getElementById('citizen-result')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50);
+                  }}
+                  disabled={!isCitizenValidated}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    !isCitizenValidated
+                      ? 'text-sand/50 cursor-not-allowed opacity-70'
+                      : currentView === 'citizen'
+                      ? 'bg-forest-mid text-white shadow-md cursor-pointer'
+                      : 'text-sand hover:text-white hover:bg-white/10 cursor-pointer'
                   }`}
+                  title={isCitizenValidated ? 'Open your validated result' : 'Result unlocks after validation'}
                 >
-                  <MapPin className="w-3.5 h-3.5" />
-                  <span>{t.gisTab}</span>
+                  <FileCheck2 className="w-3.5 h-3.5" />
+                  <span>My Result</span>
                 </button>
 
-                {onOpenCertificate && (
+                <button
+                  onClick={() => {
+                    if (isCitizenValidated) setCurrentView('gis');
+                  }}
+                  disabled={!isCitizenValidated}
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
+                    !isCitizenValidated
+                      ? 'text-sand/50 cursor-not-allowed opacity-70'
+                      : currentView === 'gis'
+                      ? 'bg-forest-mid text-white shadow-md cursor-pointer'
+                      : 'text-sand hover:text-white hover:bg-white/10 cursor-pointer'
+                  }`}
+                  title={isCitizenValidated ? 'Open cadastral map' : 'Map unlocks after validation'}
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>My Cadastral Map</span>
+                </button>
+
+                {onOpenCertificate ? (
                   <button
                     onClick={onOpenCertificate}
-                    className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-sand hover:text-white hover:bg-white/10 transition cursor-pointer"
+                    className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                      isCitizenValidated ? 'text-sand hover:text-white hover:bg-white/10' : 'text-sand/50 cursor-not-allowed opacity-70'
+                    }`}
+                    disabled={!isCitizenValidated}
+                    title={isCitizenValidated ? 'Download validation certificate' : 'Certificate will be available after successful validation'}
                   >
                     <span>📄</span>
-                    <span>Certificate</span>
+                    <span>{isCitizenValidated ? 'Certificate' : 'Certificate — Available after validation'}</span>
                   </button>
-                )}
+                ) : null}
               </nav>
-
-              {/* Discreet Officer Portal switch link */}
-              <button
-                onClick={handleSelectOfficer}
-                className="inline-flex items-center space-x-1 text-xs text-sand/80 hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-white/5 transition cursor-pointer"
-                title="Switch to Revenue Officer Portal"
-              >
-                <Building2 className="w-3.5 h-3.5 text-sand/70" />
-                <span>Officer Portal →</span>
-              </button>
             </div>
           )}
 
@@ -236,18 +260,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{t.gisTab}</span>
-                </button>
-
-                <button
-                  onClick={() => setCurrentView('ml')}
-                  className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
-                    currentView === 'ml'
-                      ? 'bg-forest-mid text-white shadow-md'
-                      : 'text-sand hover:text-white hover:bg-white/10'
-                  }`}
-                >
-                  <Activity className="w-3.5 h-3.5" />
-                  <span>{t.mlTab}</span>
                 </button>
 
                 <button

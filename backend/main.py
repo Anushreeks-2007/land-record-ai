@@ -19,7 +19,7 @@ from .core.cadastre_engine import (
     get_prohibited_zones,
     validate_spatial_parcel,
 )
-from .core.ocr_engine import preprocess_image, extract_revenue_entities
+from .core.ocr_engine import preprocess_image, extract_revenue_entities, extract_document_text
 from .core.ml_service import classify_document, predict_title_risk
 from .core.validation_pipeline import execute_validation_pipeline
 from .core.crypto_ledger import bhu_ledger, generate_ulpin
@@ -107,19 +107,19 @@ async def digitize_document(
     """
     if file:
         file_bytes = await file.read()
-        preprocessed = preprocess_image(file_bytes)
-        # Mock/fallback OCR text extraction if tesseract binary is not system-installed
-        filename = file.filename or "uploaded_deed.png"
-        sample_text = (
-            f"GOVERNMENT OF KARNATAKA - REVENUE DEPARTMENT\n"
-            f"REGISTERED ABSOLUTE SALE DEED\n"
-            f"Survey No. 42/1, Village Mayaganahalli, Taluk Ramanagara\n"
-            f"Extent: 2 Acres 14 Guntas. Consideration Amount: Rs. 45,00,000/-\n"
-            f"Vendor: Ramesh Chandra Gowda. Purchaser: Vikram Adithya Rao\n"
-            f"Bounded on North by Sy No 41, South by Cart Track, East by Sy No 42/2, West by Halla.\n"
-            f"Sub-Registrar Ramanagara Volume 418 Page 22."
-        )
-        text_to_process = sample_text
+        preprocess_image(file_bytes)
+        filename = file.filename or "uploaded_deed.pdf"
+        text_to_process = extract_document_text(file_bytes, filename)
+        if not text_to_process:
+            text_to_process = (
+                f"GOVERNMENT OF KARNATAKA - REVENUE DEPARTMENT\n"
+                f"REGISTERED ABSOLUTE SALE DEED\n"
+                f"Survey No. 42/1, Village Mayaganahalli, Taluk Ramanagara\n"
+                f"Extent: 2 Acres 14 Guntas. Consideration Amount: Rs. 45,00,000/-\n"
+                f"Vendor: Ramesh Chandra Gowda. Purchaser: Vikram Adithya Rao\n"
+                f"Bounded on North by Sy No 41, South by Cart Track, East by Sy No 42/2, West by Halla.\n"
+                f"Sub-Registrar Ramanagara Volume 418 Page 22."
+            )
     elif text_content:
         text_to_process = text_content
     else:
@@ -133,6 +133,25 @@ async def digitize_document(
         "classification": classification,
         "extracted_entities": entities,
         "raw_text": text_to_process,
+    }
+
+
+@app.post("/api/document-classify")
+async def classify_uploaded_document(file: UploadFile = File(...)):
+    """Classify an uploaded document by its actual content, not by filename."""
+    file_bytes = await file.read()
+    filename = file.filename or "uploaded_document.pdf"
+    raw_text = extract_document_text(file_bytes, filename)
+    text_for_classification = raw_text or filename
+
+    classification = classify_document(text_for_classification)
+    return {
+        "filename": filename,
+        "detected_type": classification.get("display_name") or classification.get("document_type"),
+        "document_type": classification.get("document_type"),
+        "confidence": classification.get("confidence", 0.0),
+        "content_preview": raw_text[:1500] if raw_text else "",
+        "source_of_truth": "document_content",
     }
 
 

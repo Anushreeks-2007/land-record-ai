@@ -1,3 +1,243 @@
+export type SyntheticParcelDescriptor = {
+  parcel_id: string;
+  survey_no: string;
+  hissa_no: string;
+  display_survey: string;
+  village: string;
+  hobli: string;
+  taluk: string;
+  district: string;
+  state: string;
+  land_class: string;
+  khatedar_name: string;
+  extent_acres: number;
+  extent_guntas: number;
+  extent_sq_meters: number;
+  status: string;
+  risk_level: string;
+  has_dispute: boolean;
+  encumbrance_status: string;
+  uLPIN?: string;
+};
+
+export const SYNTHETIC_LAND_RECORDS: SyntheticParcelDescriptor[] = [
+  {
+    parcel_id: 'PARCEL_42_1',
+    survey_no: '42',
+    hissa_no: '1',
+    display_survey: '42/1',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural (ಖುಷ್ಕಿ)',
+    khatedar_name: 'Ramesh Chandra Gowda',
+    extent_acres: 2,
+    extent_guntas: 14,
+    extent_sq_meters: 9510.15,
+    status: 'VALIDATED',
+    risk_level: 'LOW_RISK',
+    has_dispute: false,
+    encumbrance_status: 'NIL_ENCUMBRANCE',
+    uLPIN: '2920127277284201',
+  },
+  {
+    parcel_id: 'PARCEL_42_3',
+    survey_no: '42',
+    hissa_no: '3',
+    display_survey: '42/3',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Wet Agricultural',
+    khatedar_name: 'Gowramma',
+    extent_acres: 1,
+    extent_guntas: 10,
+    extent_sq_meters: 5058.57,
+    status: 'VALIDATED',
+    risk_level: 'MODERATE_RISK',
+    has_dispute: false,
+    encumbrance_status: 'ACTIVE_BANK_LIEN (Canara Bank Kisan Credit)',
+    uLPIN: '2920127277284203',
+  },
+  {
+    parcel_id: 'PARCEL_51_4',
+    survey_no: '51',
+    hissa_no: '4',
+    display_survey: '51/4',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural',
+    khatedar_name: 'Ananda Gowda',
+    extent_acres: 1,
+    extent_guntas: 18,
+    extent_sq_meters: 7125.0,
+    status: 'AREA_MISMATCH',
+    risk_level: 'MODERATE_RISK',
+    has_dispute: true,
+    encumbrance_status: 'BOUNDARY_DRIFT_PENDING',
+    uLPIN: '2920127277285104',
+  },
+  {
+    parcel_id: 'PARCEL_59_1',
+    survey_no: '59',
+    hissa_no: '1',
+    display_survey: '59/1',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural',
+    khatedar_name: 'Latha Narayan',
+    extent_acres: 2,
+    extent_guntas: 4,
+    extent_sq_meters: 8468.0,
+    status: 'VALIDATED',
+    risk_level: 'LOW_RISK',
+    has_dispute: false,
+    encumbrance_status: 'NIL_ENCUMBRANCE',
+    uLPIN: '2920127277285901',
+  },
+  {
+    parcel_id: 'PARCEL_61_5',
+    survey_no: '61',
+    hissa_no: '5',
+    display_survey: '61/5',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural',
+    khatedar_name: 'Srinivas Prabhu',
+    extent_acres: 2,
+    extent_guntas: 26,
+    extent_sq_meters: 10370.0,
+    status: 'AREA_MISMATCH',
+    risk_level: 'MODERATE_RISK',
+    has_dispute: true,
+    encumbrance_status: 'AREA_DISCREPANCY_PENDING',
+    uLPIN: '2920127277286105',
+  },
+  {
+    parcel_id: 'PARCEL_67_2',
+    survey_no: '67',
+    hissa_no: '2',
+    display_survey: '67/2',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural',
+    khatedar_name: 'Nagaraj Hebbar',
+    extent_acres: 1,
+    extent_guntas: 8,
+    extent_sq_meters: 5140.0,
+    status: 'HIGH_RISK',
+    risk_level: 'HIGH_RISK',
+    has_dispute: true,
+    encumbrance_status: 'DUPLICATE_DEED_REVIEW',
+    uLPIN: '2920127277286702',
+  },
+  {
+    parcel_id: 'PARCEL_88_2',
+    survey_no: '88',
+    hissa_no: '2',
+    display_survey: '88/2',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Disputed / Wetland Buffer',
+    khatedar_name: 'Venkatesh Murthy & Shivananda',
+    extent_acres: 2,
+    extent_guntas: 10,
+    extent_sq_meters: 9105.42,
+    status: 'DISPUTED',
+    risk_level: 'HIGH_RISK',
+    has_dispute: true,
+    encumbrance_status: 'SECTION_22A_PROHIBITED',
+    uLPIN: '2920127277288802',
+  },
+  {
+    parcel_id: 'PARCEL_104',
+    survey_no: '104',
+    hissa_no: '0',
+    display_survey: '104',
+    village: 'Mayaganahalli',
+    hobli: 'Kasaba',
+    taluk: 'Ramanagara',
+    district: 'Ramanagara',
+    state: 'Karnataka',
+    land_class: 'Dry Agricultural',
+    khatedar_name: 'Pratap Singh Rathore',
+    extent_acres: 2,
+    extent_guntas: 35,
+    extent_sq_meters: 11634.7,
+    status: 'AREA_MISMATCH',
+    risk_level: 'HIGH_RISK',
+    has_dispute: true,
+    encumbrance_status: 'UNDER_CIVIL_APPEAL',
+    uLPIN: '2920127277281040',
+  },
+];
+
+export const normalizeSurveyToken = (value?: string | null) => {
+  if (!value) return '';
+  return value.toString().trim().replace(/\s+/g, '').toLowerCase();
+};
+
+export const buildParcelIdentity = (properties: Record<string, any>) => {
+  const surveyNo = properties?.survey_no ?? '';
+  const hissaNo = properties?.hissa_no ?? '0';
+  const displaySurvey = properties?.display_survey ?? '';
+  const candidates = [
+    normalizeSurveyToken(displaySurvey),
+    normalizeSurveyToken(`${surveyNo}/${hissaNo}`),
+    normalizeSurveyToken(surveyNo),
+  ];
+  return candidates.filter(Boolean);
+};
+
+export const findCadastralParcel = (surveyValue?: string | null) => {
+  if (!surveyValue) {
+    return null;
+  }
+
+  const target = normalizeSurveyToken(surveyValue);
+  const parcel = CADASTRE_DATA.features.find((feature: any) => {
+    const properties = feature?.properties || {};
+    const candidates = buildParcelIdentity(properties);
+    return candidates.includes(target);
+  });
+
+  return parcel ?? null;
+};
+
+export const findSyntheticLandRecord = (surveyValue?: string | null) => {
+  if (!surveyValue) {
+    return null;
+  }
+
+  const target = normalizeSurveyToken(surveyValue);
+  return SYNTHETIC_LAND_RECORDS.find((record) => {
+    return (
+      normalizeSurveyToken(record.display_survey) === target ||
+      normalizeSurveyToken(`${record.survey_no}/${record.hissa_no}`) === target ||
+      normalizeSurveyToken(record.survey_no) === target
+    );
+  }) ?? null;
+};
+
 export const CADASTRE_DATA = {
   "type": "FeatureCollection",
   "name": "Mayaganahalli_Village_Cadastre",
@@ -115,6 +355,162 @@ export const CADASTRE_DATA = {
             [77.2831, 12.7223],
             [77.2822, 12.7222],
             [77.2821, 12.7231]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PARCEL_51_4",
+      "properties": {
+        "survey_no": "51",
+        "hissa_no": "4",
+        "display_survey": "51/4",
+        "village": "Mayaganahalli",
+        "hobli": "Kasaba",
+        "taluk": "Ramanagara",
+        "district": "Ramanagara",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 18,
+        "extent_sq_meters": 7125,
+        "land_class": "Dry Agricultural",
+        "khatedar_name": "Ananda Gowda",
+        "father_name": "Late Nanjegowda",
+        "guideline_rate_per_acre": 3300000,
+        "ulpin": "2920127277285104",
+        "status": "AREA_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "BOUNDARY_DRIFT_PENDING",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 64
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2790, 12.7246],
+            [77.2802, 12.7247],
+            [77.2805, 12.7238],
+            [77.2794, 12.7236],
+            [77.2790, 12.7246]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PARCEL_59_1",
+      "properties": {
+        "survey_no": "59",
+        "hissa_no": "1",
+        "display_survey": "59/1",
+        "village": "Mayaganahalli",
+        "hobli": "Kasaba",
+        "taluk": "Ramanagara",
+        "district": "Ramanagara",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 4,
+        "extent_sq_meters": 8468,
+        "land_class": "Dry Agricultural",
+        "khatedar_name": "Latha Narayan",
+        "father_name": "Late Narayanappa",
+        "guideline_rate_per_acre": 3350000,
+        "ulpin": "2920127277285901",
+        "status": "VALIDATED",
+        "has_dispute": false,
+        "encumbrance_status": "NIL_ENCUMBRANCE",
+        "risk_level": "LOW_RISK",
+        "risk_score": 90
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2776, 12.7251],
+            [77.2790, 12.7252],
+            [77.2791, 12.7240],
+            [77.2777, 12.7239],
+            [77.2776, 12.7251]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PARCEL_61_5",
+      "properties": {
+        "survey_no": "61",
+        "hissa_no": "5",
+        "display_survey": "61/5",
+        "village": "Mayaganahalli",
+        "hobli": "Kasaba",
+        "taluk": "Ramanagara",
+        "district": "Ramanagara",
+        "state": "Karnataka",
+        "extent_acres": 2,
+        "extent_guntas": 26,
+        "extent_sq_meters": 10370,
+        "land_class": "Dry Agricultural",
+        "khatedar_name": "Srinivas Prabhu",
+        "father_name": "Late Krishna Prabhu",
+        "guideline_rate_per_acre": 3400000,
+        "ulpin": "2920127277286105",
+        "status": "AREA_MISMATCH",
+        "has_dispute": true,
+        "encumbrance_status": "AREA_DISCREPANCY_PENDING",
+        "risk_level": "MODERATE_RISK",
+        "risk_score": 68
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2760, 12.7248],
+            [77.2775, 12.7249],
+            [77.2777, 12.7238],
+            [77.2761, 12.7237],
+            [77.2760, 12.7248]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "PARCEL_67_2",
+      "properties": {
+        "survey_no": "67",
+        "hissa_no": "2",
+        "display_survey": "67/2",
+        "village": "Mayaganahalli",
+        "hobli": "Kasaba",
+        "taluk": "Ramanagara",
+        "district": "Ramanagara",
+        "state": "Karnataka",
+        "extent_acres": 1,
+        "extent_guntas": 8,
+        "extent_sq_meters": 5140,
+        "land_class": "Dry Agricultural",
+        "khatedar_name": "Nagaraj Hebbar",
+        "father_name": "Laxman Hebbar",
+        "guideline_rate_per_acre": 3200000,
+        "ulpin": "2920127277286702",
+        "status": "HIGH_RISK",
+        "has_dispute": true,
+        "encumbrance_status": "DUPLICATE_DEED_REVIEW",
+        "risk_level": "HIGH_RISK",
+        "risk_score": 42
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [77.2750, 12.7232],
+            [77.2765, 12.7233],
+            [77.2767, 12.7220],
+            [77.2751, 12.7218],
+            [77.2750, 12.7232]
           ]
         ]
       }
